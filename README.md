@@ -3,6 +3,10 @@
 
 Some experimental rain and water drop effects in different scenarios using WebGL, by Lucas Bebber.
 
+Created a variation(s) to 
+- change some of the image assets used
+- add basic integration with custom Drupal Theme.
+
 [Article on Codrops](http://tympanus.net/codrops/?p=25417)
 
 [Demo](http://tympanus.net/Development/RainEffect/)

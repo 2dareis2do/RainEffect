@@ -18,7 +18,7 @@ function compileJS(file){
     .pipe(streamify(uglify()))
     .pipe(gulp.dest('demo/js'));
 }
-gulp.task('default', ['js1', 'js1b', 'js2', 'js2b', 'js3'],function(){});
+gulp.task('default', ['js1', 'js1b', 'js2', 'js2b', 'js2c', 'js3'],function(){});
 gulp.task('js1',function(){
   compileJS('index');
 });
@@ -30,6 +30,9 @@ gulp.task('js2',function(){
 });
 gulp.task('js2b', function () {
   compileJS('index2b');
+});
+gulp.task('js2c', function () {
+  compileJS('index2c');
 });
 gulp.task('js3',function(){
   compileJS('index3');

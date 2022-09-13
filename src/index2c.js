@@ -28,12 +28,12 @@ let raindrops,
 
 function loadTextures() {
   loadImages([
-    { name: "dropShine", src: "/themes/custom/danlobo/img/drop-shine13.png" },
-    { name: "dropAlpha", src: "/themes/custom/danlobo/img/drop-alpha.png" },
-    { name: "dropColor", src: "/themes/custom/danlobo/img/drop-color.png" },
+    { name: "dropShine", src: "img/drop-shine13.png" },
+    { name: "dropAlpha", src: "img/drop-alpha.png" },
+    { name: "dropColor", src: "img/drop-color.png" },
 
-    { name: "textureFg", src: "/themes/custom/danlobo/img/water/texture-fg2.png" },
-    { name: "textureBg", src: "/themes/custom/danlobo/img/water/texture-bg2.png" },
+    { name: "textureFg", src: "img/water/texture-fg2.png" },
+    { name: "textureBg", src: "img/water/texture-bg2.png" },
   ]).then((images) => {
     textureFgImage = images.textureFg.img;
     textureBgImage = images.textureBg.img;
@@ -45,11 +45,13 @@ function loadTextures() {
     init();
   });
 }
+
 loadTextures();
 
-// window.addEventListener('resize', reportWindowSize);
+window.addEventListener('resize', reportWindowSize);
 
 function init() {
+  console.log("init..");
   var canvas = document.querySelector('#container');
 
   var dpi = window.devicePixelRatio;
@@ -58,13 +60,14 @@ function init() {
   canvas.height = window.innerHeight;
   // canvas.style.width = window.innerWidth + "px";
   // canvas.style.height = window.innerHeight + "px";
+  console.log("raindrops", raindrops);
 
-  raindrops = new Raindrops(
-    canvas.width,
-    canvas.height,
-    dpi,
-    dropAlpha,
-    dropColor, {
+    raindrops = new Raindrops(
+      canvas.width,
+      canvas.height,
+      dpi,
+      dropAlpha,
+      dropColor, {
       minR: 20,
       maxR: 60,
       rainChance: 0.3,
@@ -80,50 +83,52 @@ function init() {
       collisionBoost: 0.35,
       collisionBoostMultiplier: 0.025,
     }
-  );
+    );
+    
 
-  textureFg = createCanvas(textureFgSize.width, textureFgSize.height);
-  textureFgCtx = textureFg.getContext('2d');
-  textureBg = createCanvas(textureBgSize.width, textureBgSize.height);
-  textureBgCtx = textureBg.getContext('2d');
+    textureFg = createCanvas(textureFgSize.width, textureFgSize.height);
+    textureFgCtx = textureFg.getContext('2d');
+    textureBg = createCanvas(textureBgSize.width, textureBgSize.height);
+    textureBgCtx = textureBg.getContext('2d');
 
-  generateTextures(textureBgImage, textureFgImage);
+    generateTextures(textureBgImage, textureFgImage);
 
-  times(80, (i) => {
-    raindrops.addDrop(
-      raindrops.createDrop({
-        x: random(canvas.width),
-        y: random(canvas.height),
-        r: random(10, 20)
-      })
-    )
-  });
-  renderer = new RainRenderer(
-    canvas,
-    raindrops.canvas,
-    textureFgImage,
-    textureBgImage,
-    dropShine, {
+    times(80, (i) => {
+      raindrops.addDrop(
+        raindrops.createDrop({
+          x: random(canvas.width),
+          y: random(canvas.height),
+          r: random(10, 20)
+        })
+      )
+    });
+  console.log("renderer", renderer);
+    renderer = new RainRenderer(
+      canvas,
+      raindrops.canvas,
+      textureFgImage,
+      textureBgImage,
+      dropShine, {
       renderShadow: true,
       minRefraction: 150,
       maxRefraction: 512,
       alphaMultiply: 7,
       alphaSubtract: 3
     }
-  );
+    );
+  console.log("renderer 2", renderer);
+
+
+  
+
+
 }
 
 function reportWindowSize() {
-  let dpi = window.devicePixelRatio;
-  console.log(dpi);
-  const heightOutput = document.querySelector('#height');
-  const widthOutput = document.querySelector('#width');
-  console.log(window.innerHeight);
-  console.log(window.innerWidth)
-
-  // heightOutput.textContent = window.innerHeight * dpi;
-  // widthOutput.textContent = window.innerWidth * dpi;;
-
+  // let dpi = window.devicePixelRatio;
+  // console.log("dpi", dpi);
+  console.log("window.innerHeight", window.innerHeight);
+  console.log("window.innerWidth", window.innerWidth);
 }
 
 function generateTextures(fg, bg, alpha = 1) {

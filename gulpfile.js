@@ -18,12 +18,18 @@ function compileJS(file){
     .pipe(streamify(uglify()))
     .pipe(gulp.dest('demo/js'));
 }
-gulp.task('default',['js1','js2','js3'],function(){});
+gulp.task('default', ['js1', 'js1b', 'js2', 'js2b', 'js3'],function(){});
 gulp.task('js1',function(){
   compileJS('index');
 });
+gulp.task('js1b', function () {
+  compileJS('index1b');
+});
 gulp.task('js2',function(){
   compileJS('index2');
+});
+gulp.task('js2b', function () {
+  compileJS('index2b');
 });
 gulp.task('js3',function(){
   compileJS('index3');

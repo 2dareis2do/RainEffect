@@ -11,6 +11,11 @@ Created a variation(s) to
 
 [Demo](http://tympanus.net/Development/RainEffect/)
 
+
+## Install
+
+Gulp 3 requires node 11.15.0 or earlier. Use nvm to install.
+
 ## License
 
 Integrate or build upon it for free in your personal or commercial projects. Don't republish, redistribute or sell "as-is". 

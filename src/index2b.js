@@ -47,6 +47,8 @@ function loadTextures() {
 }
 loadTextures();
 
+window.addEventListener('resize', reportWindowSize);
+
 function init() {
   var canvas = document.querySelector('#container');
 
@@ -80,19 +82,6 @@ function init() {
     }
   );
 
-  // function reportWindowSize() {
-  //   let dpi = window.devicePixelRatio;
-
-  //   const heightOutput = document.querySelector('#height');
-  //   const widthOutput = document.querySelector('#width');
-
-  //   heightOutput.textContent = window.innerHeight * dpi;
-  //   widthOutput.textContent = window.innerWidth * dpi;;
-
-  // }
-
-  // window.addEventListener('resize', reportWindowSize);
-
   textureFg = createCanvas(textureFgSize.width, textureFgSize.height);
   textureFgCtx = textureFg.getContext('2d');
   textureBg = createCanvas(textureBgSize.width, textureBgSize.height);
@@ -122,6 +111,17 @@ function init() {
       alphaSubtract: 3
     }
   );
+}
+
+function reportWindowSize() {
+  let dpi = window.devicePixelRatio;
+
+  const heightOutput = document.querySelector('#height');
+  const widthOutput = document.querySelector('#width');
+
+  heightOutput.textContent = window.innerHeight * dpi;
+  widthOutput.textContent = window.innerWidth * dpi;;
+
 }
 
 function generateTextures(fg, bg, alpha = 1) {

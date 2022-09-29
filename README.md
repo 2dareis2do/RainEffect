@@ -30,6 +30,13 @@ Follow Codrops: [Twitter](http://www.twitter.com/codrops), [Facebook](http://www
 
 [© Codrops 2015](http://www.codrops.com)
 
+## Update Sept 2022
+Introduced square fixed version of rain to work across different viewports
+we can use css and object fit contain to position accordingly
+This approach allows the canvas to respond better when switching between 
+landscape and portrait.
+
+Similar approach can be seen at [https://webglsamples.org] https://webglsamples.org/aquarium/aquarium.html
 
 
 

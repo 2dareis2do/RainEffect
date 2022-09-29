@@ -2,29 +2,18 @@ import 'core-js';
 import RainRenderer from "./rain-renderer";
 import Raindrops from "./raindrops";
 import loadImages from "./image-loader";
-import createCanvas from "./create-canvas";
 import times from "./times";
 import { random } from "./random";
 
 let textureFgImage, textureBgImage,
   dropColor, dropAlpha, dropShine;
 
-let textureFg,
-  textureFgCtx,
-  textureBg,
-  textureBgCtx;
-
-let textureBgSize = {
-  width: 384,
-  height: 256
-}
-let textureFgSize = {
-  width: 96,
-  height: 64
-}
 let raindrops,
-  renderer,
-  canvas;
+  renderer;
+  
+let canvas = document.querySelector('#container');
+
+let dpi = window.devicePixelRatio;
 
 function loadTextures() {
   loadImages([
@@ -48,21 +37,12 @@ function loadTextures() {
 
 loadTextures();
 
-window.addEventListener('resize', reportWindowSize);
-
 function init() {
-  console.log("init..");
-  var canvas = document.querySelector('#container');
+  
+  canvas.width = 1024;
+  canvas.height = 1024;
 
-  var dpi = window.devicePixelRatio;
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  // canvas.style.width = window.innerWidth + "px";
-  // canvas.style.height = window.innerHeight + "px";
-  console.log("raindrops", raindrops);
-
-    raindrops = new Raindrops(
+  raindrops = new Raindrops(
       canvas.width,
       canvas.height,
       dpi,
@@ -85,14 +65,6 @@ function init() {
     }
     );
     
-
-    textureFg = createCanvas(textureFgSize.width, textureFgSize.height);
-    textureFgCtx = textureFg.getContext('2d');
-    textureBg = createCanvas(textureBgSize.width, textureBgSize.height);
-    textureBgCtx = textureBg.getContext('2d');
-
-    generateTextures(textureBgImage, textureFgImage);
-
     times(80, (i) => {
       raindrops.addDrop(
         raindrops.createDrop({
@@ -102,7 +74,7 @@ function init() {
         })
       )
     });
-  console.log("renderer", renderer);
+    
     renderer = new RainRenderer(
       canvas,
       raindrops.canvas,
@@ -116,25 +88,4 @@ function init() {
       alphaSubtract: 3
     }
     );
-  console.log("renderer 2", renderer);
-
-
-  
-
-
-}
-
-function reportWindowSize() {
-  // let dpi = window.devicePixelRatio;
-  // console.log("dpi", dpi);
-  console.log("window.innerHeight", window.innerHeight);
-  console.log("window.innerWidth", window.innerWidth);
-}
-
-function generateTextures(fg, bg, alpha = 1) {
-  textureFgCtx.globalAlpha = alpha;
-  textureFgCtx.drawImage(fg, 0, 0, textureFgSize.width, textureFgSize.height);
-
-  textureBgCtx.globalAlpha = alpha;
-  textureBgCtx.drawImage(bg, 0, 0, textureBgSize.width, textureBgSize.height);
 }

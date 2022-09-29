@@ -1,4 +1,3 @@
-import loadImages from "./image-loader";
 import times from "./times.js";
 import createCanvas from "./create-canvas.js";
 import {random, chance} from "./random";
